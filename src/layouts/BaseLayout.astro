@@ -8,7 +8,7 @@ const { pageTitle } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang={LANGUAGE} class="dark">
+<html lang={LANGUAGE} class="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +21,7 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle} - {SITE_TITLE}</title>
   </head>
 
-  <body class="min-h-screen flex flex-col font-sans bg-[var(--color-bg)] text-[var(--color-text)] dark">
+  <body class="min-h-screen flex flex-col font-sans bg-[var(--color-bg)] text-[var(--color-text)]">
     <Header />
     
     <main class="flex-1">

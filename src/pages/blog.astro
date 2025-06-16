@@ -47,11 +47,6 @@ const pageTitle = "Blog";
           <div class="text-sm text-[var(--color-subtext)]">
             {post.frontmatter.date.slice(0, 10)}
           </div>
-          {post.frontmatter.description && (
-            <p class="mt-1 text-base text-[var(--color-subtext)]">
-              {post.frontmatter.description}
-            </p>
-          )}
         </li>
       ))}
     </ul>
