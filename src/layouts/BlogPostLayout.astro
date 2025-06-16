@@ -17,7 +17,6 @@ const { frontmatter } = Astro.props;
       <time class="text-[var(--color-subtext)] text-sm" datetime={frontmatter.date}>
         {String(frontmatter.date).slice(0, 10)}
       </time>
-    </header>
     <section class="prose prose-zinc dark:prose-invert">
       <slot />
     </section>
