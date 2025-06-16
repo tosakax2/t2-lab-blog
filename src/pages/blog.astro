@@ -50,18 +50,19 @@ const pageTitle = "Blog";
             </span>
             {/* カテゴリ */}
             {post.frontmatter.categories && post.frontmatter.categories.length > 0 && (
-              <span class="inline-block bg-[var(--color-accent)] text-[var(--color-bg)] px-2 py-0.5 rounded text-xs font-semibold">
+              <span class="bg-[var(--color-accent)] text-stone-50 px-2 py-0.5 rounded text-xs">
                 {post.frontmatter.categories.join(', ')}
               </span>
             )}
             {/* タグ */}
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && post.frontmatter.tags.map(tag => (
-              <span class="inline-block border border-[var(--color-accent)] text-[var(--color-accent)] px-2 py-0.5 rounded text-xs font-semibold">
+              <span class="border border-[var(--color-accent)] text-[var(--color-accent)] px-2 py-0.5 rounded text-xs">
                 # {tag}
               </span>
             ))}
           </div>
-          <a href={post.url} class="block hover:underline font-bold text-xl">
+          {/* タイトル */}
+          <a href={post.url} class="font-semibold text-xl">
             {post.frontmatter.title}
           </a>
         </li>

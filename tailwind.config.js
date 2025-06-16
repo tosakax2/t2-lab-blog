@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Noto Sans JP"', '"Noto Sans CJK JP"', 'sans-serif'],
+        sans: ['"Noto Sans CJK JP"', '"Noto Sans JP"', 'sans-serif'],
       },
     },
   },
