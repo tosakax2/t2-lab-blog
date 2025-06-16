@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { hashTitle } from "../utils/hashTitle";
+
+// Markdownファイルを全部取得
+const postFiles = import.meta.glob('../blog/*.md', { eager: true });
+
+// 一覧データを生成
+const posts = Object.entries(postFiles).map(([path, mod]) => {
+  const typedMod = mod as {
+    frontmatter: {
+      title: string;
+      date: string;
+      description?: string;
+      slug?: string;
+    };
+    Content: any;
+  };
+  // 日付をYYYYMMDD形式で取得
+  const date = typedMod.frontmatter.date.replace(/-/g, '').slice(0, 8);
+  // ハッシュslug
+  const hash = hashTitle(typedMod.frontmatter.title);
+  // slug: frontmatter.slug > 日付＋ハッシュ
+  const slug = typedMod.frontmatter.slug || `${date}-${hash}`;
+  return {
+    ...typedMod,
+    url: `/blog/${slug}`,
+    slug,
+  };
+});
+
+// 任意: 日付で降順ソート
+posts.sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
+
+const pageTitle = "Blog";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h1 class="text-3xl font-bold mb-6">{pageTitle}</h1>
+  <section class="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-6">
+    <ul class="space-y-4">
+      {posts.map((post) => (
+        <li>
+          <a href={post.url} class="block hover:underline font-semibold text-lg">
+            {post.frontmatter.title}
+          </a>
+          <div class="text-sm text-[var(--color-subtext)]">
+            {post.frontmatter.date}
+          </div>
+          {post.frontmatter.description && (
+            <p class="mt-1 text-base text-[var(--color-subtext)]">
+              {post.frontmatter.description}
+            </p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

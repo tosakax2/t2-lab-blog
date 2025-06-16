@@ -1,0 +1,30 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    description?: string;
+    // 必要に応じて他のフィールドも追加
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}
+  <article class="prose mx-auto my-12 max-w-3xl bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-8">
+      <h1 class="text-4xl font-bold mb-2">{frontmatter.title}</h1>
+      <time class="text-[var(--color-subtext)] text-sm" datetime={frontmatter.date}>
+        {frontmatter.date}
+      </time>
+      {frontmatter.description && (
+        <p class="mt-2 text-lg text-[var(--color-subtext)]">{frontmatter.description}</p>
+      )}
+    </header>
+    <section class="prose prose-zinc dark:prose-invert">
+      <slot />
+    </section>
+  </article>
+</BaseLayout>

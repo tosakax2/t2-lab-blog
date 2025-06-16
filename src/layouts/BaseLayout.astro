@@ -1,0 +1,36 @@
+---
+import { LANGUAGE , SITE_TITLE} from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const { pageTitle } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={LANGUAGE} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noto-sans-cjk-jp@1.0.1/index.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" />
+
+    <title>{pageTitle} - {SITE_TITLE}</title>
+  </head>
+
+  <body class="min-h-screen flex flex-col font-sans bg-[var(--color-bg)] text-[var(--color-text)] dark">
+    <Header />
+    
+    <main class="flex-1">
+      <div class="mx-auto max-w-2xl my-8 px-8 py-8">
+        <slot />
+      </div>
+    </main>
+
+    <Footer />
+    <script type="module" src="/js/scramble-title.js"></script>
+  </body>
+</html>

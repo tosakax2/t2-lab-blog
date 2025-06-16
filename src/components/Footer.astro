@@ -1,0 +1,9 @@
+---
+import { AUTHOR } from "../config";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="text-md mt-auto border-t border-[var(--color-border)] text-[var(--color-subtext)] py-3 flex flex-col items-center justify-center">
+  <small>© 2021 - {currentYear} {AUTHOR}. All rights reserved.</small>
+</footer>
