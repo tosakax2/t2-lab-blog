@@ -36,7 +36,7 @@ const pageTitle = "Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h1 class="text-3xl font-bold mb-6">{pageTitle}</h1>
+  <h1 data-scramble class="text-3xl font-bold mb-6">{pageTitle}</h1>
   <section class="bg-[var(--color-bg)] border border-[var(--color-border)] rounded-xl p-6">
     <ul class="space-y-4">
       {posts.map((post) => (
@@ -45,7 +45,7 @@ const pageTitle = "Blog";
             {post.frontmatter.title}
           </a>
           <div class="text-sm text-[var(--color-subtext)]">
-            {post.frontmatter.date}
+            {post.frontmatter.date.slice(0, 10)}
           </div>
           {post.frontmatter.description && (
             <p class="mt-1 text-base text-[var(--color-subtext)]">
