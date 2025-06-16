@@ -1,14 +1,12 @@
-export default {
+module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Noto Sans CJK JP"', '"Noto Sans JP"', 'sans-serif'],
+        sans: ['"Noto Sans JP"', '"Noto Sans CJK JP"', 'sans-serif'],
       },
     },
   },
-}
-module.exports = {
   content: [
     "./src/**/*.{astro,js,ts,jsx,tsx,md}",
   ],

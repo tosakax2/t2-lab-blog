@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family: "Noto Sans CJK JP", "Noto Sans JP";
+  font-family: "Noto Sans JP", "Noto Sans CJK JP", sans-serif;
   --color-bg: #faf9f5;
   --color-text: #3d3d3a;
   --color-subtext: #73726c;
