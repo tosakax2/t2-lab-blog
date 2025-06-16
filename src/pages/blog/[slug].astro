@@ -2,10 +2,32 @@
 import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 import { hashTitle } from "../../utils/hashTitle";
 
-// Markdownファイルを全部取得
-const postFiles = import.meta.glob('../../blog/*.md', { eager: true });
+// URLのslugパラメータ取得
+const { slug } = Astro.params;
 
-// slugとモジュールのマッピングを生成
+// getStaticPathsのエクスポート
+export async function getStaticPaths() {
+  const postFiles = import.meta.glob('../../blog/*.md', { eager: true });
+  const postEntries = Object.entries(postFiles).map(([path, mod]) => {
+    const typedMod = mod as {
+      frontmatter: { title: string; date: string; slug?: string };
+      Content: any;
+    };
+    const date = typedMod.frontmatter.date.replace(/-/g, '').slice(0, 8);
+    const hash = hashTitle(typedMod.frontmatter.title);
+    const slug = typedMod.frontmatter.slug || `${date}-${hash}`;
+    return {
+      slug,
+      mod: typedMod,
+    };
+  });
+  return postEntries.map(entry => ({
+    params: { slug: entry.slug },
+  }));
+}
+
+// 記事一覧取得（本体側も同様のロジックで再生成）
+const postFiles = import.meta.glob('../../blog/*.md', { eager: true });
 const postEntries = Object.entries(postFiles).map(([path, mod]) => {
   const typedMod = mod as {
     frontmatter: { title: string; date: string; slug?: string };
@@ -19,16 +41,6 @@ const postEntries = Object.entries(postFiles).map(([path, mod]) => {
     mod: typedMod,
   };
 });
-
-// getStaticPathsのエクスポート
-export async function getStaticPaths() {
-  return postEntries.map(entry => ({
-    params: { slug: entry.slug },
-  }));
-}
-
-// URLのslugパラメータ取得
-const { slug } = Astro.params;
 
 // slugに対応する記事を取得
 const entry = postEntries.find(entry => entry.slug === slug);
