@@ -13,6 +13,8 @@ const posts = Object.entries(postFiles).map(([path, mod]) => {
       date: string;
       description?: string;
       slug?: string;
+      categories?: string[];
+      tags?: string[];
     };
     Content: any;
   };
@@ -41,12 +43,27 @@ const pageTitle = "Blog";
     <ul class="space-y-4">
       {posts.map((post) => (
         <li>
-          <a href={post.url} class="block hover:underline font-semibold text-lg">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            {/* 日付 */}
+            <span class="text-sm text-[var(--color-subtext)]">
+              {post.frontmatter.date.slice(0, 10)}
+            </span>
+            {/* カテゴリ */}
+            {post.frontmatter.categories && post.frontmatter.categories.length > 0 && (
+              <span class="inline-block bg-[var(--color-accent)] text-[var(--color-bg)] px-2 py-0.5 rounded text-xs font-semibold">
+                {post.frontmatter.categories.join(', ')}
+              </span>
+            )}
+            {/* タグ */}
+            {post.frontmatter.tags && post.frontmatter.tags.length > 0 && post.frontmatter.tags.map(tag => (
+              <span class="inline-block border border-[var(--color-accent)] text-[var(--color-accent)] px-2 py-0.5 rounded text-xs font-semibold">
+                # {tag}
+              </span>
+            ))}
+          </div>
+          <a href={post.url} class="block hover:underline font-bold text-xl">
             {post.frontmatter.title}
           </a>
-          <div class="text-sm text-[var(--color-subtext)]">
-            {post.frontmatter.date.slice(0, 10)}
-          </div>
         </li>
       ))}
     </ul>
